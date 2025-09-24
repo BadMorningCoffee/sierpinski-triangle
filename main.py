@@ -1,10 +1,18 @@
 import plotly.express as px
 import pandas as pd
 
-# Sample data
-data = {'x_values': [1, 2, 3, 4, 5],
-        'y_values': [2, 4, 1, 5, 3],
-        'category': ['A', 'B', 'A', 'C', 'B']}
+def lerp(t, p0, p1):
+    return ((1-t)*p0 + t*p1)
+
+
+controlPoints = [(-1, 0), (1, 0), (0, 2)]
+startingPoints = [(0, 0)]
+t = 1/2
+
+
+data = {'x_values': list (map (lambda point: point[0], controlPoints)), #Creates a list of all the X positions of the controlPoints
+        'y_values': list (map (lambda point: point[1], controlPoints)), #Creates a list of all the Y positions of the controlPoints
+        'category': list(map(lambda a : "Control Point", controlPoints))} #Creates a list containing only "Control Point" for every element in control Points
 df = pd.DataFrame(data)
 
 # Create a scatter plot
